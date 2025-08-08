@@ -11,7 +11,7 @@ interface CategoryPageProps {
 
 export async function generateStaticParams() {
   const categories = await getCategories()
-  return categories.map((category) => ({
+  return categories.map((category: Category) => ({
     slug: category.slug,
   }))
 }
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: CategoryPageProps) {
   const { slug } = await params
   const categories = await getCategories()
-  const category = categories.find((cat) => cat.slug === slug)
+  const category = categories.find((cat: Category) => cat.slug === slug)
 
   if (!category) {
     return {
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params
   const categories = await getCategories()
-  const category = categories.find((cat) => cat.slug === slug)
+  const category = categories.find((cat: Category) => cat.slug === slug)
 
   if (!category) {
     notFound()
@@ -97,7 +97,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
+              {posts.map((post: Post) => (
                 <PostCard key={post.id} post={post} />
               ))}
             </div>

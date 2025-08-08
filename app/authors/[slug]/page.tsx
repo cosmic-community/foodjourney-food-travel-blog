@@ -11,7 +11,7 @@ interface AuthorPageProps {
 
 export async function generateStaticParams() {
   const authors = await getAuthors()
-  return authors.map((author) => ({
+  return authors.map((author: Author) => ({
     slug: author.slug,
   }))
 }
@@ -42,7 +42,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
 
   // Get all posts and filter by this author on client side since we have the author object populated
   const allPosts: Post[] = await getPosts()
-  const authorPosts = allPosts.filter(post => 
+  const authorPosts = allPosts.filter((post: Post) => 
     post.metadata.author?.id === author.id || post.metadata.author?.slug === author.slug
   )
 
@@ -162,7 +162,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {authorPosts.map((post) => (
+              {authorPosts.map((post: Post) => (
                 <PostCard key={post.id} post={post} />
               ))}
             </div>
