@@ -1,8 +1,18 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
+import MobileNav from './MobileNav'
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-white shadow-sm border-b border-gray-200 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link 
@@ -15,6 +25,7 @@ export default function Header() {
             </span>
           </Link>
           
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <Link 
               href="/" 
@@ -35,6 +46,12 @@ export default function Header() {
               Authors
             </Link>
           </nav>
+
+          {/* Mobile Navigation */}
+          <MobileNav 
+            isOpen={mobileMenuOpen} 
+            onToggle={toggleMobileMenu}
+          />
         </div>
       </div>
     </header>
