@@ -1,0 +1,18 @@
+# app/robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://foodjourney.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Block admin areas if any exist in the future
+Disallow: /admin/
+Disallow: /api/
+
+# Allow all food and travel content
+Allow: /posts/
+Allow: /categories/
+Allow: /authors/
