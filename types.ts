@@ -1,21 +1,25 @@
-// Base Cosmic object interface
+// Base Cosmic object interface - all properties optional for flexibility
 interface CosmicObject {
   id: string;
   slug: string;
   title: string;
   content?: string;
-  metadata: Record<string, any>;
-  type: string;
-  created_at: string;
-  modified_at: string;
-  status: string;
-  published_at: string;
+  metadata?: Record<string, any>;
+  type?: string;
+  created_at?: string;
+  modified_at?: string;
+  status?: string;
+  published_at?: string;
+  bucket?: string;
+  thumbnail?: string;
+  modified_by?: string;
+  created_by?: string;
 }
 
 // Post interface with specific metadata structure
 export interface Post extends CosmicObject {
-  type: 'posts';
-  metadata: {
+  type?: 'posts';
+  metadata?: {
     title?: string;
     excerpt?: string;
     content?: string;
@@ -37,8 +41,8 @@ export interface Post extends CosmicObject {
 
 // Author interface with specific metadata structure
 export interface Author extends CosmicObject {
-  type: 'authors';
-  metadata: {
+  type?: 'authors';
+  metadata?: {
     full_name?: string;
     bio?: string;
     profile_photo?: {
@@ -54,8 +58,8 @@ export interface Author extends CosmicObject {
 
 // Category interface with specific metadata structure  
 export interface Category extends CosmicObject {
-  type: 'categories';
-  metadata: {
+  type?: 'categories';
+  metadata?: {
     name?: string;
     description?: string;
     color?: string;
