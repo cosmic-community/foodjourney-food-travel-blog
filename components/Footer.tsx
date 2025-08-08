@@ -1,5 +1,18 @@
-export default function Footer() {
+import Link from 'next/link'
+import { getCategories } from '@/lib/cosmic'
+
+export default async function Footer() {
   const currentYear = new Date().getFullYear()
+  
+  // Fetch categories for dynamic links
+  let categories: any[] = []
+  try {
+    const categoriesData = await getCategories()
+    categories = categoriesData.slice(0, 4) // Limit to 4 categories for footer
+  } catch (error) {
+    console.error('Error fetching categories for footer:', error)
+    // Fallback to empty array if fetch fails
+  }
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -19,18 +32,22 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Categories</h3>
             <div className="space-y-2">
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">
-                Street Food 🍜
-              </a>
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">
-                Local Markets 🛒
-              </a>
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">
-                Desserts & Sweets 🍰
-              </a>
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">
-                Fine Dining 🍽️
-              </a>
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/categories/${category.slug}`}
+                  className="block text-gray-400 hover:text-white transition-colors"
+                >
+                  {category.metadata?.name || category.title} {category.metadata?.icon}
+                </Link>
+              ))}
+              {categories.length === 0 && (
+                <>
+                  <Link href="/categories" className="block text-gray-400 hover:text-white transition-colors">
+                    Browse All Categories
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           
