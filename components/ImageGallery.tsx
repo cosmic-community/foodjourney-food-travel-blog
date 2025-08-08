@@ -11,7 +11,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {images
-        .filter((image): image is Image => image && image.imgix_url) // Type guard to filter out invalid images
+        .filter((image): image is Image => image && !!image.imgix_url) // Type guard to filter out invalid images
         .map((image, index) => (
           <div key={index} className="relative group">
             <img
