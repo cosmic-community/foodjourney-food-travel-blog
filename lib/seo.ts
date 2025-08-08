@@ -151,7 +151,7 @@ export function generateAuthorMetadata(author: Author): Metadata {
 }
 
 export function generateStructuredData(data: {
-  type: 'WebSite' | 'Article' | 'Person' | 'Organization' | 'BreadcrumbList' | 'CollectionPage'
+  type: 'WebSite' | 'Article' | 'Person' | 'Organization' | 'BreadcrumbList' | 'CollectionPage' | 'Blog'
   props: any
 }) {
   const baseData = {
